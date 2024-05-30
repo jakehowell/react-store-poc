@@ -1,4 +1,4 @@
-# React App Coding Assignment
+# React App Coding Sample
 
 ## Running the app
 1. Run `npm install` to install code dependencies.
