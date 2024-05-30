@@ -1,0 +1,102 @@
+USE master;
+GO
+
+IF NOT EXISTS (SELECT * FROM sys.databases WHERE name = 'strider_general_store')
+BEGIN
+    CREATE DATABASE strider_general_store;
+END;
+GO
+
+USE strider_general_store;
+GO
+
+CREATE TABLE dbo.Customers (
+    id INT IDENTITY(1,1) PRIMARY KEY,
+    name VARCHAR(50) NOT NULL,
+    createdAt DATETIME NOT NULL DEFAULT GETDATE(),
+    updatedAt DATETIME NOT NULL DEFAULT GETDATE()
+);
+GO
+
+CREATE TABLE dbo.Items (
+    id INT IDENTITY(1,1) PRIMARY KEY,
+    name VARCHAR(50) NOT NULL,
+    price DECIMAL(10,2) NOT NULL,
+    createdAt DATETIME NOT NULL DEFAULT GETDATE(),
+    updatedAt DATETIME NOT NULL DEFAULT GETDATE()
+);
+GO
+
+CREATE TABLE dbo.Orders (
+    id INT IDENTITY(1,1) PRIMARY KEY,
+    customerId INT NOT NULL,
+    date DATETIME NOT NULL,
+    total DECIMAL(10,2) NOT NULL,
+    createdAt DATETIME NOT NULL DEFAULT GETDATE(),
+    updatedAt DATETIME NOT NULL DEFAULT GETDATE(),
+    FOREIGN KEY (customerId) REFERENCES dbo.Customers(id)
+);
+GO
+
+CREATE TABLE dbo.OrderItems (
+    id INT IDENTITY(1,1) PRIMARY KEY,
+    orderId INT NOT NULL,
+    itemId INT NOT NULL,
+    quantity INT NOT NULL,
+    createdAt DATETIME NOT NULL DEFAULT GETDATE(),
+    updatedAt DATETIME NOT NULL DEFAULT GETDATE(),
+    FOREIGN KEY (orderId) REFERENCES dbo.Orders(id),
+    FOREIGN KEY (itemId) REFERENCES dbo.Items(id)
+);
+GO
+
+INSERT INTO dbo.Customers (name, createdAt, updatedAt) VALUES
+    ('Elizabeth', '2023-07-31 02:22:00.000', '2023-07-31 02:22:00.000'),
+    ('Alexander', '2023-07-31 02:22:00.000', '2023-07-31 02:22:00.000'),
+    ('Emira', '2023-07-31 02:22:00.000', '2023-07-31 02:22:00.000'),
+    ('LJ', '2023-07-31 02:22:00.000', '2023-07-31 02:22:00.000'),
+    ('Armand', '2023-07-31 02:22:00.000', '2023-07-31 02:22:00.000'),
+    ('Elizabeth', '2023-07-31 02:22:00.000', '2023-07-31 02:22:00.000');
+GO
+
+INSERT INTO dbo.Orders (customerId, total, date, createdAt, updatedAt) VALUES
+    (1, 30.00, '2021-02-01 08:30:00.000', '2023-07-31 02:22:00.000', '2023-07-31 02:22:00.000'),
+    (2, 52.50, '2021-02-02 10:00:00.000', '2023-07-31 02:22:00.000', '2023-07-31 02:22:00.000'),
+    (1, 6.00, '2021-02-02 12:46:00.000', '2023-07-31 02:22:00.000', '2023-07-31 02:22:00.000'),
+    (3, 30.50, '2021-02-03 15:25:00.000', '2023-07-31 02:22:00.000', '2023-07-31 02:22:00.000'),
+    (4, 36.00, '2021-02-04 18:50:00.000', '2023-07-31 02:22:00.000', '2023-07-31 02:22:00.000'),
+    (5, 52.50, '2021-02-04 08:05:00.000', '2023-07-31 02:22:00.000', '2023-07-31 02:22:00.000'),
+    (6, 30.50, '2021-02-06 17:30:00.000', '2023-07-31 02:22:00.000', '2023-07-31 02:22:00.000'),
+    (3, 18.00, '2021-02-08 16:30:00.000', '2023-07-31 02:22:00.000', '2023-07-31 02:22:00.000');
+GO
+
+INSERT INTO dbo.Items (name, price, createdAt, updatedAt) VALUES
+    ('Candle', 3.00, '2023-07-31 02:22:00.000', '2023-07-31 02:22:00.000'),
+    ('Book', 15.00, '2023-07-31 02:22:00.000', '2023-07-31 02:22:00.000'),
+    ('Pen', 0.75, '2023-07-31 02:22:00.000', '2023-07-31 02:22:00.000'),
+    ('Paper', 5.25, '2023-07-31 02:22:00.000', '2023-07-31 02:22:00.000' ),
+    ('Jar', 12.50, '2023-07-31 02:22:00.000', '2023-07-31 02:22:00.000'),
+    ('Movie', 18.00, '2023-07-31 02:22:00.000', '2023-07-31 02:22:00.000');
+GO
+
+INSERT INTO dbo.OrderItems (orderId, itemId, quantity, createdAt, updatedAt) VALUES
+    (1, 1, 3, '2023-07-31 02:22:00.000', '2023-07-31 02:22:00.000'),
+    (1, 2, 1, '2023-07-31 02:22:00.000', '2023-07-31 02:22:00.000'),
+    (1, 3, 1, '2023-07-31 02:22:00.000', '2023-07-31 02:22:00.000'),
+    (1, 4, 1, '2023-07-31 02:22:00.000', '2023-07-31 02:22:00.000'),
+    (2, 2, 1, '2023-07-31 02:22:00.000', '2023-07-31 02:22:00.000'),
+    (2, 5, 3, '2023-07-31 02:22:00.000', '2023-07-31 02:22:00.000'),
+    (3, 3, 1, '2023-07-31 02:22:00.000', '2023-07-31 02:22:00.000'),
+    (3, 4, 1, '2023-07-31 02:22:00.000', '2023-07-31 02:22:00.000'),
+    (4, 1, 1, '2023-07-31 02:22:00.000', '2023-07-31 02:22:00.000'),
+    (4, 2, 1, '2023-07-31 02:22:00.000', '2023-07-31 02:22:00.000'),
+    (4, 5, 1, '2023-07-31 02:22:00.000', '2023-07-31 02:22:00.000'),
+    (5, 3, 1, '2023-07-31 02:22:00.000', '2023-07-31 02:22:00.000'),
+    (5, 2, 2, '2023-07-31 02:22:00.000', '2023-07-31 02:22:00.000'),
+    (5, 4, 1, '2023-07-31 02:22:00.000', '2023-07-31 02:22:00.000'),
+    (6, 2, 1, '2023-07-31 02:22:00.000', '2023-07-31 02:22:00.000'),
+    (6, 5, 3, '2023-07-31 02:22:00.000', '2023-07-31 02:22:00.000'),
+    (7, 6, 1, '2023-07-31 02:22:00.000', '2023-07-31 02:22:00.000'),
+    (7, 5, 1, '2023-07-31 02:22:00.000', '2023-07-31 02:22:00.000'),
+    (8, 6, 1, '2023-07-31 02:22:00.000', '2023-07-31 02:22:00.000');
+GO

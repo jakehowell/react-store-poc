@@ -1,0 +1,53 @@
+.Orders {
+  text-align: center;
+}
+
+.order-data {
+  overflow: hidden;
+  min-width: 65%;
+}
+
+.order-data-header {
+  background-color: #333;
+  color: #fff;
+  margin: 0;
+  padding: 24px;
+}
+
+.Item-Link, .Customer-Link {
+  color: rgb(67 123 210)
+}
+
+.order-grid-header th,
+.order-summary-header th {
+  font-weight: bold;
+}
+
+.order-grid {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+.order-grid td {
+  border: none;
+}
+
+.order-grid tr:not(.collapsed-row) {
+  border-top: 1px solid #ccc;
+}
+
+.order-grid tr:first-child {
+  border-top: none;
+}
+
+.order-interface {
+  display: flex;
+}
+
+.charts {
+  width: 35%;
+  height: 500px;
+  box-sizing: border-box;
+  padding: 0 30px;
+  text-align: center;
+}

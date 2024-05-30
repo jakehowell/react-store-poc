@@ -1,0 +1,26 @@
+.Root {
+  text-align: center;
+}
+
+.root-header {
+  background-color: rgb(35 56 86);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  color: white;
+  padding: 0 24px;
+}
+
+.root-header h1 {
+  font-size: 24px;
+}
+
+.root-main {
+  padding: 30px;
+}
+
+.canvas {
+  text-align: left;
+}
+

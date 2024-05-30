@@ -1,0 +1,25 @@
+.item-data {
+    overflow: hidden;
+}
+
+.item-header {
+    background-color: #333;
+    color: #fff;
+    margin: 0;
+    padding: 24px;
+    display: flex;
+    align-items: flex-start;
+}
+
+.back-link {
+    color: #fff;
+    height: 24px;
+    margin-right: 24px;
+    fill: #fff;
+    margin-top: -5px;
+}
+
+.item-data-body {
+    padding: 24px;
+}
+
