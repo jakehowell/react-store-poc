@@ -1,4 +1,5 @@
 # React App Coding Sample
+This is a copy of an assessment I did as part of a coding challenge.
 
 ## Running the app
 1. Run `npm install` to install code dependencies.
